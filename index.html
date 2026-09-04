@@ -89,16 +89,12 @@
   <div class="property-grid" id="propertyContainer"></div>
 
   <script>
-    // WESTERN, CENTRAL & HARBOUR LINE MUMBAI LOCATIONS
     const locations = [
-      // Western Line
       "Malad West, Mumbai", "Malad East, Mumbai", "Andheri West, Mumbai", "Andheri East, Mumbai", 
       "Borivali West, Mumbai", "Borivali East, Mumbai", "Goregaon West, Mumbai", "Goregaon East, Mumbai", 
       "Bandra West, Mumbai", "Kandivali West, Mumbai", "Dadar West, Mumbai", "Vasai West, Mumbai",
-      // Central Line
       "Thane West, Mumbai", "Kalyan West, Mumbai", "Dombivli East, Mumbai", "Ghatkopar East, Mumbai", 
       "Kurla West, Mumbai", "Mulund West, Mumbai", "Bhandup West, Mumbai",
-      // Harbour Line
       "Vashi, Navi Mumbai", "Nerul, Navi Mumbai", "Panvel, Navi Mumbai", "Belapur, Navi Mumbai"
     ];
 
@@ -112,7 +108,9 @@
 
     const properties = [];
 
-    // GENERATE 50,000 MUMBAI PROPERTIES (ALL LINES COVERED)
+    // REAL CONTACT NUMBER UPDATED
+    const MY_REAL_PHONE = "919321654713";
+
     for (let i = 1; i <= 50000; i++) {
       const loc = locations[i % locations.length];
       const cat = categories[i % categories.length];
@@ -126,12 +124,11 @@
         type: cat,
         price: `₹${priceVal.toLocaleString('en-IN')} / month`,
         tags: ["WiFi Available", "24/7 Water", "Near Railway Station"],
-        phone: "919876543210",
+        phone: MY_REAL_PHONE,
         image: img
       });
     }
 
-    // Handle User Form Submissions
     document.getElementById('addRoomForm').addEventListener('submit', function(e) {
       e.preventDefault();
       
