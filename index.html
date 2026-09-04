@@ -8,8 +8,14 @@
     :root { --bg-color: #f4f4f9; --card-bg: #ffffff; --text-color: #333333; }
     body.dark-mode { --bg-color: #1e1e2f; --card-bg: #2d2d44; --text-color: #ffffff; }
     body { font-family: Arial, sans-serif; background-color: var(--bg-color); color: var(--text-color); margin: 0; padding: 20px; transition: 0.3s; }
-    
-    header { background: #007bff; color: white; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; border-radius: 8px; }
+    <!-- Header Section with Logo -->
+  <header style="display: flex; align-items: center; justify-content: space-between; background: #007bff; color: white; padding: 15px 20px; border-radius: 8px;">
+    <div style="display: flex; align-items: center; gap: 12px;">
+      <img src="https://images.jdmagicbox.com/v2/comp/bangalore/t2/080pxx80.xx80.230703183630.i6t2/catalogue/house-of-priya-lifestyle-basavanagudi-bangalore-modular-kitchen-manufacturers-in63s96fr6-250.jpg" alt="Priya House Logo" style="height: 45px; width: 45px; border-radius: 50%; object-fit: cover; border: 2px solid white;">
+      <h1 style="margin: 0; font-size: 22px;">Priya House - Rent Room Finder</h1>
+    </div>
+    <button class="theme-btn" onclick="document.body.classList.toggle('dark-mode')">🌙 Dark Mode</button>
+  </header>
     .theme-btn { background: white; color: #007bff; border: none; padding: 8px 12px; border-radius: 5px; cursor: pointer; font-weight: bold; }
     
     .filter-section { background: var(--card-bg); padding: 20px; margin: 20px 0; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
