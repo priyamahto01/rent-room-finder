@@ -10,11 +10,12 @@
     body { font-family: Arial, sans-serif; background-color: var(--bg-color); color: var(--text-color); margin: 0; padding: 20px; transition: 0.3s; }
     
     .theme-btn { background: white; color: #007bff; border: none; padding: 8px 12px; border-radius: 5px; cursor: pointer; font-weight: bold; }
-    .filter-section { background: var(--card-bg); padding: 20px; margin: 20px 0; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+    .section-box { background: var(--card-bg); padding: 20px; margin: 20px 0; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
     .filter-group { margin-bottom: 15px; }
     label { font-weight: bold; display: block; margin-bottom: 5px; }
-    select, input[type="text"] { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; }
+    select, input[type="text"], input[type="tel"], input[type="number"], textarea { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; margin-bottom: 10px; }
     
+    .btn-submit { background-color: #28a745; color: white; padding: 10px 15px; border: none; border-radius: 5px; font-weight: bold; cursor: pointer; width: 100%; font-size: 16px; }
     .property-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 20px; }
     .room-card { background: var(--card-bg); padding: 15px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); display: flex; flex-direction: column; justify-content: space-between; }
     .room-card img { width: 100%; height: 180px; object-fit: cover; border-radius: 6px; }
@@ -35,13 +36,41 @@
     <button class="theme-btn" onclick="document.body.classList.toggle('dark-mode')">🌙 Dark Mode</button>
   </header>
 
-  <!-- Filter & Search Section -->
-  <div class="filter-section">
+  <!-- Add Property Form (Real Owners/Brokers) -->
+  <div class="section-box" style="border: 2px solid #28a745;">
+    <h2 style="color: #28a745; margin-top: 0;">🏠 List Your Property / Post Room (Free)</h2>
+    <p>Ghar ke malik ya room dene wale apni details yahan bharein:</p>
+    <form id="addRoomForm">
+      <label>Your Name / Contact Person:</label>
+      <input type="text" id="ownerName" placeholder="Enter full name" required>
+
+      <label>WhatsApp / Phone Number:</label>
+      <input type="tel" id="ownerPhone" placeholder="Enter 10-digit mobile number" required>
+
+      <label>Location & City:</label>
+      <input type="text" id="roomLoc" placeholder="e.g. Andheri West, Mumbai" required>
+
+      <label>Category:</label>
+      <select id="roomCat">
+        <option value="Single Room">Single Room</option>
+        <option value="1 BHK">1 BHK</option>
+        <option value="2 BHK">2 BHK</option>
+        <option value="PG / Hostel">PG / Hostel</option>
+      </select>
+
+      <label>Monthly Rent (₹):</label>
+      <input type="number" id="roomPrice" placeholder="e.g. 12000" required>
+
+      <button type="submit" class="btn-submit">➕ Submit Room Listing</button>
+    </form>
+  </div>
+
+  <!-- Search & Filter Section -->
+  <div class="section-box">
     <h2>Search Rooms, PGs & Apartments</h2>
-    
     <div class="filter-group">
       <label>Location / Area:</label>
-      <input type="text" id="searchInput" onkeyup="filterProperties()" placeholder="Type location (e.g. Mumbai, Andheri, Bandra, Delhi, Bangalore)...">
+      <input type="text" id="searchInput" onkeyup="filterProperties()" placeholder="Type area (e.g. Andheri, Bandra, Thane, Borivali)...">
     </div>
 
     <div class="filter-group">
@@ -61,49 +90,67 @@
   <div class="property-grid" id="propertyContainer"></div>
 
   <script>
-    const locations = [
-      "Andheri West, Mumbai", "Bandra East, Mumbai", "Thane West, Mumbai", "Dadar, Mumbai", "Borivali, Mumbai", 
-      "Navi Mumbai", "Powai, Mumbai", "Goregaon, Mumbai", "Kothrud, Pune", "Hinjewadi, Pune", 
-      "Connaught Place, Delhi", "Koramangala, Bangalore", "HSR Layout, Bangalore"
+    // REAL DATA BASE (Aap yahan direct naye real rooms append kar sakti hain)
+    const properties = [
+      {
+        id: 1,
+        title: "Single Furnished Room for Working Professionals",
+        location: "Andheri West, Mumbai",
+        type: "Single Room",
+        price: "₹12,000 / month",
+        tags: ["WiFi", "AC Available", "Near Station"],
+        phone: "919876543210",
+        image: "https://images.unsplash.com/photo-1598928506311-c55ded91a20c?w=400"
+      },
+      {
+        id: 2,
+        title: "1 BHK Spacious Apartment",
+        location: "Thane West, Mumbai",
+        type: "1 BHK",
+        price: "₹18,000 / month",
+        tags: ["Parking", "Lift", "24/7 Water"],
+        phone: "919876543210",
+        image: "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=400"
+      },
+      {
+        id: 3,
+        title: "Boys & Girls PG with Food Facility",
+        location: "Bandra East, Mumbai",
+        type: "PG / Hostel",
+        price: "₹9,500 / month",
+        tags: ["Food Included", "WiFi", "Security"],
+        phone: "919876543210",
+        image: "https://images.unsplash.com/photo-1555854877-bab0e564b8d5?w=400"
+      }
     ];
-    const categories = ["Single Room", "1 BHK", "2 BHK", "PG / Hostel"];
-    const images = [
-      "https://images.unsplash.com/photo-1598928506311-c55ded91a20c?w=400",
-      "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=400",
-      "https://images.unsplash.com/photo-1555854877-bab0e564b8d5?w=400",
-      "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=400"
-    ];
 
-    const properties = [];
+    // Form Submission Handling
+    document.getElementById('addRoomForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const newProp = {
+        id: properties.length + 1,
+        title: `${document.getElementById('roomCat').value} listed by ${document.getElementById('ownerName').value}`,
+        location: document.getElementById('roomLoc').value,
+        type: document.getElementById('roomCat').value,
+        price: `₹${parseInt(document.getElementById('roomPrice').value).toLocaleString('en-IN')} / month`,
+        tags: ["Newly Added", "Verified Owner"],
+        phone: `91${document.getElementById('ownerPhone').value.replace(/\D/g,'')}`,
+        image: "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=400"
+      };
 
-    // GENERATE 1,00,000 PROPERTIES AUTOMATICALLY
-    for (let i = 1; i <= 100000; i++) {
-      const loc = locations[i % locations.length];
-      const cat = categories[i % categories.length];
-      const img = images[i % images.length];
-      const priceVal = (5000 + (i * 120) % 35000);
-
-      properties.push({
-        id: i,
-        title: `${cat} Option #${i} in ${loc}`,
-        location: `${loc}`,
-        type: cat,
-        price: `₹${priceVal.toLocaleString('en-IN')} / month`,
-        tags: ["WiFi Available", "24/7 Water", "Good Security"],
-        phone: "911234567890",
-        image: img
-      });
-    }
+      properties.unshift(newProp);
+      displayProperties(properties);
+      alert("Property Successfully Listed!");
+      this.reset();
+    });
 
     function displayProperties(items) {
       const container = document.getElementById("propertyContainer");
-      document.getElementById("count").innerText = items.length.toLocaleString('en-IN');
+      document.getElementById("count").innerText = items.length;
       container.innerHTML = "";
 
-      // Display top 100 at a time for fast page rendering
-      const displayItems = items.slice(0, 100);
-
-      displayItems.forEach(prop => {
+      items.forEach(prop => {
         const tagsHTML = prop.tags.map(t => `<span class="tag">${t}</span>`).join("");
         
         container.innerHTML += `
@@ -142,4 +189,4 @@
   </script>
 
 </body>
-</html> 
+</html>
