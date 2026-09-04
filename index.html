@@ -3,12 +3,26 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Rent Room Finder</title>
+  <title>Priya House - Rent Room Finder</title>
   <style>
     :root { --bg-color: #f4f4f9; --card-bg: #ffffff; --text-color: #333333; }
     body.dark-mode { --bg-color: #1e1e2f; --card-bg: #2d2d44; --text-color: #ffffff; }
     body { font-family: Arial, sans-serif; background-color: var(--bg-color); color: var(--text-color); margin: 0; padding: 20px; transition: 0.3s; }
-    <!-- Header Section with Logo -->
+    
+    .theme-btn { background: white; color: #007bff; border: none; padding: 8px 12px; border-radius: 5px; cursor: pointer; font-weight: bold; }
+    .filter-section { background: var(--card-bg); padding: 20px; margin: 20px 0; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+    .filter-group { margin-bottom: 15px; }
+    label { font-weight: bold; display: block; margin-bottom: 5px; }
+    select, input[type="text"], input[type="number"] { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; }
+    .checkbox-group { display: flex; gap: 15px; flex-wrap: wrap; margin-top: 5px; }
+    .room-card { background: var(--card-bg); padding: 15px; border-radius: 8px; margin-bottom: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+    .btn-call { background-color: #007bff; color: white; padding: 10px 15px; text-decoration: none; border-radius: 5px; font-weight: bold; display: inline-block; margin-top: 10px; margin-right: 10px; }
+    .btn-whatsapp { background-color: #25D366; color: white; padding: 10px 15px; text-decoration: none; border-radius: 5px; font-weight: bold; display: inline-block; margin-top: 10px; }
+  </style>
+</head>
+<body>
+
+  <!-- Header Section with Priya House Logo -->
   <header style="display: flex; align-items: center; justify-content: space-between; background: #007bff; color: white; padding: 15px 20px; border-radius: 8px;">
     <div style="display: flex; align-items: center; gap: 12px;">
       <img src="https://images.jdmagicbox.com/v2/comp/bangalore/t2/080pxx80.xx80.230703183630.i6t2/catalogue/house-of-priya-lifestyle-basavanagudi-bangalore-modular-kitchen-manufacturers-in63s96fr6-250.jpg" alt="Priya House Logo" style="height: 45px; width: 45px; border-radius: 50%; object-fit: cover; border: 2px solid white;">
@@ -16,37 +30,14 @@
     </div>
     <button class="theme-btn" onclick="document.body.classList.toggle('dark-mode')">🌙 Dark Mode</button>
   </header>
-    .theme-btn { background: white; color: #007bff; border: none; padding: 8px 12px; border-radius: 5px; cursor: pointer; font-weight: bold; }
-    
-    .filter-section { background: var(--card-bg); padding: 20px; margin: 20px 0; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-    .filter-group { margin-bottom: 15px; }
-    label { font-weight: bold; display: block; margin-bottom: 5px; }
-    select, input[type="text"], input[type="number"] { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; }
-    
-    .checkbox-group { display: flex; gap: 15px; flex-wrap: wrap; margin-top: 5px; }
-    .room-card { background: var(--card-bg); padding: 15px; border-radius: 8px; margin-bottom: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-    
-    .btn-call { background-color: #007bff; color: white; padding: 10px 15px; text-decoration: none; border-radius: 5px; font-weight: bold; display: inline-block; margin-top: 10px; margin-right: 10px; }
-    .btn-whatsapp { background-color: #25D366; color: white; padding: 10px 15px; text-decoration: none; border-radius: 5px; font-weight: bold; display: inline-block; margin-top: 10px; }
-  </style>
-</head>
-<body>
-
-  <!-- Header Section -->
-  <header>
-    <h1>Rent Room Finder</h1>
-    <button class="theme-btn" onclick="document.body.classList.toggle('dark-mode')">🌙 Dark Mode</button>
-  </header>
 
   <!-- Filter & Search Section -->
   <div class="filter-section">
     <h2>Search & Filter Rooms</h2>
-    
     <div class="filter-group">
       <label>Location / Area:</label>
       <input type="text" placeholder="Type city or area name...">
     </div>
-
     <div class="filter-group">
       <label>Room Category:</label>
       <select>
@@ -57,12 +48,10 @@
         <option>PG / Hostel</option>
       </select>
     </div>
-
     <div class="filter-group">
       <label>Max Monthly Budget (₹):</label>
       <input type="number" placeholder="e.g. 5000">
     </div>
-
     <div class="filter-group">
       <label>Facilities Required:</label>
       <div class="checkbox-group">
@@ -85,7 +74,6 @@
     <p><strong>Rent:</strong> ₹5,000 / month</p>
     <p><strong>Type:</strong> Single Room (Furnished)</p>
     <p><strong>Facilities:</strong> Free WiFi, AC, Attached Bathroom</p>
-    
     <a href="tel:1234567890" class="btn-call">📞 Call Owner</a>
     <a href="https://wa.me/1234567890?text=Hi,%20I%20am%20interested%20in%20your%20rented%20room" class="btn-whatsapp" target="_blank">💬 WhatsApp Owner</a>
   </div>
@@ -97,7 +85,6 @@
     <p><strong>Rent:</strong> ₹10,000 / month</p>
     <p><strong>Type:</strong> 1 BHK</p>
     <p><strong>Facilities:</strong> Parking, 24/7 Water, Security</p>
-    
     <a href="tel:1234567890" class="btn-call">📞 Call Owner</a>
     <a href="https://wa.me/1234567890?text=Hi,%20I%20am%20interested%20in%20your%20rented%20room" class="btn-whatsapp" target="_blank">💬 WhatsApp Owner</a>
   </div>
